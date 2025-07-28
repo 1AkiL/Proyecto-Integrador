@@ -175,6 +175,7 @@
         <button class="btn" data-lab="lab7">Lab7</button>
       </div>
 
+      {%block content%}
       <div class="programas">
         <ul id="prog-lab1" class="programas-list">
           <li>{{laboratorio.programas_instalados}}
@@ -211,7 +212,8 @@
           <li>RStudio</li>
         </ul>
       </div>
-    {%block content%}
+     
+    
       <div class="table-container">
         <table id="lab1" class="active">
           <thead>
@@ -246,15 +248,17 @@
               <th>Sistema operativo</th>
             </tr>
           </thead>
+          {% for recurso in recursos%}
           <tbody>
             <tr>
-              <td>Dell OptiPlex 3080</td>
-              <td>16 GB</td>
-              <td>Intel i7</td>
-              <td>1 TB</td>
-              <td>Windows 11</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
           </tbody>
+          {%endfor%}
         </table>
 
         <table id="lab3">
