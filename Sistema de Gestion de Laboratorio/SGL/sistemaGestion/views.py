@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from .models import Recurso, Laboratorio, Usuario
 from django.utils.timezone import localtime, localdate
 from .forms import ReservaForm
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 #TODO Make the login system work
@@ -29,9 +30,17 @@ def calendario(request):
 @login_required
 #TODO Try to make this today
 def recursos(request):
-    recursos=Recurso.objects.all()
-    laboratorio=Laboratorio.objects.all()
-    return render(request,'recursos.html',{'recursos':recursos})
+    recursos=Recurso.objects.filter(idLab=1)  
+    recursos2=Recurso.objects.filter(idLab=2)
+    recursos3=Recurso.objects.filter(idLab=3)
+    recursos4=Recurso.objects.filter(idLab=4)
+    recursos5=Recurso.objects.filter(idLab=5)
+    recursos6=Recurso.objects.filter(idLab=6)
+    recursos7=Recurso.objects.filter(idLab=7)
+    return render(request,'recursos.html',{
+        'recursos':recursos, 'recursos2': recursos2, 'recursos3':recursos3,'recursos4':recursos4,
+        'recursos5':recursos5, 'recursos6':recursos6, 'recursos7':recursos7})
+
 
 @login_required
 #TODO Make reservations to work

@@ -33,7 +33,6 @@ class EstadoRecurso(models.Model):
 class Laboratorio(models.Model):
     idLab=models.AutoField(primary_key=True, unique=True)
     nombre_lab=models.CharField(max_length=30)
-    programas_instalados=models.TextField(default='Google Chrome')
     
     def __str__(self):
         return self.nombre_lab
@@ -49,6 +48,8 @@ class Recurso(models.Model):
     procesador=models.CharField(max_length=25, null=True)
     almacenamiento=models.IntegerField(null=True, default=1)
     sistema_operativo=models.CharField(max_length=10, null= True)
+    programas_instalados=models.CharField(max_length=30)
+
     
     def __str__(self):
         return self.nombre_recurso
