@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Recurso, Laboratorio, Usuario
+from .models import Recurso, Laboratorio, Usuario, Reserva
 from django.utils.timezone import localtime, localdate
 from .forms import ReservaForm
 from django.shortcuts import get_object_or_404
@@ -62,6 +62,11 @@ def reservar(request):
                 'form':ReservaForm,
                 'error': 'Algun dato es invalido'
             })
+
+def mis_reservas(request):
+    reservas=Reserva.objects.filter(idUsuario=request.user)
+    return render(request, 'mis_reservas.html',{'reservas':reservas})
+        
 
 @login_required
 #TODO This needs the first system to work
