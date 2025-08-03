@@ -9,14 +9,18 @@ from django.shortcuts import get_object_or_404
 
 # Create your views here.
 #TODO Make the login system work
+
+def test(request):
+    return render(request, 'test.html')
+
 def signin(request):
     if request.method=='GET':
-        return render (request,'index.php')
+        return render (request,'index.html')
     else:
         user=authenticate(request, username=request.POST['matricula'], password=request.POST['contrasena'])
         print(request.POST)
         if user is None:
-            return render(request,'index.php',{
+            return render(request,'index.html',{
                 'error':'Matricula o contraseña incorrectos'
             })
         else:
@@ -25,7 +29,7 @@ def signin(request):
 
 @login_required
 def calendario(request):
-    return render(request,'consultarcalendario.php')
+    return render(request,'consultarcalendario.html')
 
 @login_required
 #TODO Try to make this today
@@ -63,10 +67,15 @@ def reservar(request):
                 'error': 'Algun dato es invalido'
             })
 
+@login_required
 def mis_reservas(request):
     reservas=Reserva.objects.filter(idUsuario=request.user)
-    return render(request, 'mis_reservas.html',{'reservas':reservas})
+    return render(request, 'misreservas.html',{'reservas':reservas})
         
+@login_required
+def admin_reservas(request):
+    reservas=Reserva.objects.all()
+    return render(request,'todas_las_reservas.html')
 
 @login_required
 #TODO This needs the first system to work

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SGL - Calendario</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #fff4ff;
+      font-family: Arial, sans-serif;
+    }
+    .fc-daygrid-day-frame {
+      cursor: pointer;
+    }
+    .fc-daygrid-day-frame:hover {
+      background-color: #f0e8f9;
+      transition: background-color 0.2s ease;
+    }
+    .header-img {
+      width: 100%;
+      height: auto;
+      max-height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+    .sidebar-custom {
+      background-color: #e3e3e3;
+      border-right: 1px solid #ccc;
+      width: 230px;
+      min-height: 100vh;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+    .sidebar-title {
+      background-color: #f0f0f0;
+      padding: 10px 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      border-bottom: 1px solid #dcdcdc;
+    }
+    .sidebar-buttons {
+      padding: 15px;
+    }
+    .sidebar-buttons .btn {
+      width: 100%;
+      margin-bottom: 10px;
+      background-color: #682c8b;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      font-weight: 600;
+      border-radius: 5px;
+      text-align: center;
+      transition: background-color 0.3s ease;
+      font-size: 0.95rem;
+    }
+    .sidebar-buttons .btn:hover {
+      background-color: #501f65;
+    }
+    #calendar {
+      width: 100%;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      min-width: 0;
+      min-height: 600px;
+    }
+    .fc-event {
+      background-color: transparent !important;
+      border: none !important;
+      color: black !important;
+    }
+    .fc-event-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-right: 4px; 
+      display: inline-block;
+    }
+    .ocupado {
+      background-color: red !important;
+    }
+    .mantenimiento {
+      background-color: yellow !important;
+    }
+    .disponible {
+      background-color: green !important;
+    }
+    .nodisponible {
+      background-color: red !important;
+    }
+    .legend {
+      font-size: 1rem;
+      display: flex;
+      gap: 25px;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 20px 0 10px 10px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legend-item span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+    #day-events-panel {
+      display: none;
+      width: 300px;
+      background: #f8f9fa;
+      padding: 15px;
+      margin-left: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #day-events-panel h5 {
+      font-weight: bold;
+    }
+    #day-events-panel li {
+      list-style: none;
+    }
+    #close-panel {
+      background-color: transparent;
+      border: none;
+      float: right;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    
+    .fc-event-title.small-text {
+      font-size: 0.7rem !important;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="../images/encabezado.png" alt="Encabezado" class="header-img" />
+  </header>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto px-0">
+        <div class="sidebar-custom">
+          <div class="sidebar-title text-center">CONSULTA</div>
+          <div class="sidebar-buttons">
+            <a href="/recursos" class="btn d-block"><i class="bi bi-pc-display me-2"></i>Recursos</a>
+            <a href="/reservar" class="btn d-block"><i class="bi bi-calendar-check me-2"></i>Reserva</a>
+            <a href="todas_las_reservas.php" class="btn d-block"><i class="bi bi-list-check me-2"></i></i>Administrar Reservas</a>
+            <a href="misreservas.php" class="btn"><i class="bi bi-calendar2-week me-2"></i></i>Mis Reservas</a>
+            <a href="../index.php" class="btn d-block"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
+            
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="legend">
+          <div class="legend-item"><span class="nodisponible"></span> No disponible</div>
+          <div class="legend-item"><span class="mantenimiento"></span> En mantenimiento</div>
+          <div class="legend-item"><span class="disponible"></span> Disponible</div>
+        </div>
+
+        <div class="d-flex flex-wrap flex-md-nowrap" style="gap: 20px;">
+          <div id="calendar" style="flex: 1;"></div>
+          <div id="day-events-panel">
+            <button id="close-panel">&times;</button>
+            <h5>Reservas del día</h5>
+            <ul id="event-list" class="list-unstyled"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        locale: 'es',
+        initialDate: new Date(),
+        height: 'auto',
+        dayMaxEvents: true,
+        eventOverlap: false,
+        headerToolbar: {
+          left: 'prev,next',
+          center: 'title',
+          right: ''
+        },
+        viewDidMount: function(info) {
+          const titleEl = info.el.querySelector('.fc-toolbar-title');
+          if (titleEl) {
+            titleEl.textContent = titleEl.textContent.charAt(0).toUpperCase() + titleEl.textContent.slice(1);
+          }
+        },
+        events: function(info, successCallback, failureCallback) {
+          fetch('../get_reservas_consultas.php')
+            .then(response => response.json())
+            .then(events => {
+              const calendarEvents = events.map(event => {
+                let colorClass = 'ocupado';
+                if (event.color === 'yellow') colorClass = 'mantenimiento';
+                if (event.color === 'green') colorClass = 'disponible';
+                return {
+                  title: event.description,
+                  start: event.start,
+                  end: event.end,
+                  color: event.color,
+                  extendedProps: {
+                    colorClass,
+                    description: event.description,
+                    user: event.user,
+                    color: event.color
+                  }
+                };
+              });
+              successCallback(calendarEvents);
+            })
+            .catch(error => {
+              console.error('Error al cargar los eventos:', error);
+              failureCallback(error);
+            });
+        },
+        eventContent: function(info) {
+          const dotElement = document.createElement('span');
+          dotElement.className = `fc-event-dot ${info.event.extendedProps.colorClass}`;
+          const eventTitle = document.createElement('span');
+          eventTitle.className = 'fc-event-title';
+          eventTitle.innerText = info.event.title;
+          const eventDiv = document.createElement('div');
+          eventDiv.appendChild(dotElement);
+          eventDiv.appendChild(eventTitle);
+          return { domNodes: [eventDiv] };
+        }
+      });
+
+      calendar.render();
+
+      
+      function setSmallTextEvents(small) {
+        document.querySelectorAll('.fc-event-title').forEach(el => {
+          if (small) {
+            el.classList.add('small-text');
+          } else {
+            el.classList.remove('small-text');
+          }
+        });
+      }
+
+      calendar.on('dateClick', function(info) {
+        const selectedDate = info.dateStr;
+        const panel = document.getElementById('day-events-panel');
+        const list = document.getElementById('event-list');
+        list.innerHTML = '';
+        const dayEvents = calendar.getEvents().filter(event => {
+          const eventDateStr = event.start.toISOString().split('T')[0];
+          return eventDateStr === selectedDate;
+        });
+        if (dayEvents.length > 0) {
+          dayEvents.forEach(ev => {
+            const li = document.createElement('li');
+            li.style.borderLeft = `6px solid ${ev.extendedProps.color || 'gray'}`;
+            li.style.padding = '8px 12px';
+            li.style.marginBottom = '8px';
+            li.style.backgroundColor = '#fff';
+            li.style.borderRadius = '4px';
+            li.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+            li.innerHTML = `
+              <strong>${ev.extendedProps.user}</strong><br>
+              <small>${ev.extendedProps.description}</small>
+            `;
+            list.appendChild(li);
+          });
+        } else {
+          const li = document.createElement('li');
+          li.textContent = 'No hay reservas';
+          list.appendChild(li);
+        }
+
+        panel.style.display = 'block';
+        setSmallTextEvents(true);
+        setTimeout(() => calendar.updateSize(), 50);
+      });
+
+      document.getElementById('close-panel').addEventListener('click', function () {
+        document.getElementById('day-events-panel').style.display = 'none';
+        setSmallTextEvents(false);
+        calendar.updateSize();
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
