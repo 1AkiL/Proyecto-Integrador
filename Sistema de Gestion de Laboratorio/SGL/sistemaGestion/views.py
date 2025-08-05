@@ -6,6 +6,9 @@ from .models import Recurso, Laboratorio, Usuario, Reserva
 from django.utils.timezone import localtime, localdate
 from .forms import ReservaForm
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from django.core.mail import send_mail 
+from SGL.settings import EMAIL_HOST_USER
 
 # Create your views here.
 #TODO Make the login system work
@@ -50,7 +53,7 @@ def recursos(request):
 #TODO Make reservations to work
 def reservar(request):
     if request.method=='GET':
-        return render(request, 'reservar_test.html', {
+        return render(request, 'reservar.html', {
             'form':ReservaForm
         })
     else:
@@ -82,3 +85,11 @@ def admin_reservas(request):
 def signoff(request):
     logout(request)
     return redirect('signin')
+
+def email_test(request):
+    send_mail(subject= 'Test email',
+              message= 'This is just a test email',
+              from_email=EMAIL_HOST_USER,
+              recipient_list=['trashbasuritan@gmail.com']
+              )
+    return HttpResponse('Message sent')

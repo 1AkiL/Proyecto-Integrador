@@ -27,6 +27,7 @@ urlpatterns = [
     path('logoff/',views.signoff,name='logout'),
     path('test/',views.test),
     path('mis-reservas/',views.mis_reservas,name='mis-reservas'),
-    path('reservas/admin/', views.mis_reservas,name='reservas-admin')
+    path('reservas/admin/', views.mis_reservas,name='reservas-admin'),
+    path('mail/', views.email_test),
     
 ]
