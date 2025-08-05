@@ -90,6 +90,6 @@ def email_test(request):
     send_mail(subject= 'Test email',
               message= 'This is just a test email',
               from_email=EMAIL_HOST_USER,
-              recipient_list=['trashbasuritan@gmail.com']
+              recipient_list=[request.user.email]
               )
     return HttpResponse('Message sent')
