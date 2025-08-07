@@ -54,10 +54,12 @@ def recursos(request):
 def reservar(request):
     if request.method=='GET':
         return render(request, 'reservar.html', {
-            'form':ReservaForm
+            'form':ReservaForm,
+            'usuario':request.user
         })
     else:
         try:
+            print(request.POST)
             reserva=ReservaForm(request.POST)
             nueva_reserva=reserva.save(commit=False)
             nueva_reserva.idUsuario=request.user
@@ -65,9 +67,10 @@ def reservar(request):
             print (request.POST)
             return redirect('calendario')
         except ValueError:
-            return render(request, 'reservar_test', {
+            return render(request, 'reservar.html', {
                 'form':ReservaForm,
-                'error': 'Algun dato es invalido'
+                'error': 'Algun dato es invalido',
+                'usuario':request.user
             })
 
 @login_required
