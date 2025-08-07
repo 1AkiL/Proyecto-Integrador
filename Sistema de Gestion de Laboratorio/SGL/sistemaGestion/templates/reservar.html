@@ -298,6 +298,7 @@
 
         const formData = new FormData(form);
 
+        //TODO Make the program not depend on procesar_reserva.php
         fetch('../procesar_reserva.php', {
           method: 'POST',
           body: formData
