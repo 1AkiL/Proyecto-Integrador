@@ -84,8 +84,9 @@ class Reserva(models.Model):
     idUsuario=models.ForeignKey(User, on_delete=models.CASCADE)
     estado_reserva=models.ForeignKey(EstadoReserva, on_delete=models.CASCADE, blank=True)
     idLab=models.ForeignKey(Laboratorio, on_delete=models.CASCADE)
-    inicio_reserva=models.DateTimeField()
-    fin_reserva=models.DateTimeField()
+    fecha_reserva=models.DateField()
+    inicio_reserva=models.TimeField()
+    fin_reserva=models.TimeField()
     
     def __str__(self):
         return 'Reserva'+ self.idReserva
