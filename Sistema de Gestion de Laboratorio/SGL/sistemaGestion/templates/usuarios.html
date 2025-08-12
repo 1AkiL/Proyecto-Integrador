@@ -16,6 +16,31 @@
       display: flex;
       flex-direction: column;
     }
+        .buttons-container {
+      background-color: #f9f5fb;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border-radius: 6px;
+    }
+
+    .buttons-container .btn {
+      background-color: #501f65;
+      color: white;
+      border: none;
+      padding: 12px 0;
+      width: 150px;
+      font-weight: 600;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    .buttons-container .btn.active {
+      background-color: #501f65 !important;
+    }
 
     .header-img {
       width: 100%;
@@ -91,6 +116,11 @@
     <div class="table-container">
       <h4 class="mb-4 text-center">Usuarios</h4>
       <div class="table-responsive">
+        <div class="flex-grow">
+          <div class="buttons-container">
+            <a href="/usuarios/admin/add" class="btn"<i class="bi bi-plus-circle"</i>Añadir Usuarios</a>
+          </div>
+        </div>
         <table class="table table-bordered align-middle">
           <thead class="table-dark">
             <tr>
@@ -109,7 +139,7 @@
               <td>{{usuario.user.email}}</td>
               <td>{{usuario.RolId}}</td>
               <td>
-                <a href="" class="btn btn-borrar btn-sm">
+                <a href="/usuarios/admin/{{usuario.user.id}}/delete" class="btn btn-borrar btn-sm">
                   <i class="bi bi-trash"></i> Borrar
                 </a>
               </td>

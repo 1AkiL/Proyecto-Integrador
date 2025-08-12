@@ -89,9 +89,9 @@
             <td>{{reserva.inicio_reserva}} - {{reserva.fin_reserva}}</td>
             <td>{{reserva.idLab}}</td>
             <td>
-              <button class="btn btn-danger btn-sm" type="button" title="Borrar reserva">
+              <a href="/reservas/{{reserva.idReserva}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar reserva">
                 <i class="bi bi-trash"></i>
-              </button>
+              </a>
             </td>
             {%endfor%}
           </tr>

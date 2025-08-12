@@ -71,7 +71,7 @@ class EstadoReserva(models.Model):
 class Reserva(models.Model):
     idReserva=models.AutoField(primary_key=True, unique=True)
     idUsuario=models.ForeignKey(User, on_delete=models.CASCADE)
-    estado_reserva=models.ForeignKey(EstadoReserva, on_delete=models.CASCADE, blank=True)
+    estado_reserva=models.ForeignKey(EstadoReserva, on_delete=models.CASCADE, default=1)
     idLab=models.ForeignKey(Laboratorio, on_delete=models.CASCADE)
     fecha_reserva=models.DateField()
     inicio_reserva=models.TimeField()

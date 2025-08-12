@@ -30,10 +30,16 @@ urlpatterns = [
     path('mail/', views.email_test),
     path('sidebar/',views.sidebar, name='sidebar'),
     path('reservas/<int:idReserva>/delete', views.borrar_mi_reserva, name='borrar-mi-reserva'),
-    path('reservas/admin/<int:idReserva>/delete', views.borrar_reserva_admin, name='borrar-reserva-admin'),
+    path('reservas/admin/<int:id>/delete', views.borrar_reserva_admin, name='borrar-reserva-admin'),
     path('usuarios/admin', views.admin_usuarios, name='usuarios-admin'),
     path('mantenimientos/', views.mantenimientos, name='mantenimientos'),
-    path('recurso/add/',views.addRecurso, name="add-recurso")
+    path('recurso/add/',views.addRecurso, name="add-recurso"),
+    path('usuarios/admin/add/',views.addUsuario, name='add-usuario'),
+    path('mantenimientos/add/',views.addMantenimiento, name='add-mantenimiento'),
+    path('usuarios/admin/<str:user>/delete/',views.borrar_usuarios, name='borrar-usuarios'),
+    path('mantenimientos/<int:idMantenimiento>/delete/',views.borrar_mantenimientos, name='borrar-mantenimientos'),
+    path('recursos/<int:idRecurso>/delete',views.borrar_recursos,name='borrar-recursos')
+    
     
     
 ]
