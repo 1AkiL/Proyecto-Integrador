@@ -58,7 +58,6 @@ def reservar(request):
         })
     else:
         try:
-            print(request.POST)
             matricula=request.POST['matricula']
             fecha_res=request.POST['fecha_reserva']
             inicio_res=request.POST['inicio_reserva']
