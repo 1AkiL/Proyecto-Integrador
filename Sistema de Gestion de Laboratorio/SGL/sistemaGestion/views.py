@@ -5,6 +5,7 @@ from .models import Recurso, Laboratorio, Usuario, Reserva, Mantenimiento, Estad
 from django.contrib.auth.models import User
 from django.utils.timezone import localtime, localdate, now
 from django.utils import timezone
+from django.utils.dateparse import parse_time
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.core.mail import send_mail 
@@ -35,6 +36,7 @@ def calendario(request):
 
 @login_required
 def recursos(request):
+    UsuarioAdmin=Usuario.objects.filter(user=request.user, RolId=1)
     recursos=Recurso.objects.filter(idLab=1)  
     recursos2=Recurso.objects.filter(idLab=2)
     recursos3=Recurso.objects.filter(idLab=3)
@@ -46,11 +48,11 @@ def recursos(request):
     print(request.POST)
     return render(request,'recursos.html',{
         'recursos':recursos, 'recursos2': recursos2, 'recursos3':recursos3,'recursos4':recursos4,
-        'recursos5':recursos5, 'recursos6':recursos6, 'recursos7':recursos7})
+        'recursos5':recursos5, 'recursos6':recursos6, 'recursos7':recursos7,'UsuarioAdmin':UsuarioAdmin})
 
 
 @login_required
-#TODO Make reservations to work
+#TODO Make it so no reservation before now is allowed
 def reservar(request):
     usuario=Usuario.objects.get(user=request.user.id)
     lab=Laboratorio.objects.all()
@@ -69,8 +71,6 @@ def reservar(request):
             laboratorio=request.POST['lab']
             matricula=User.objects.get(id=matricula)
             laboratorio=Laboratorio.objects.get(idLab=laboratorio)
-            #if timezone.now > inicio_res or timezone.now >= fin_res: #If only this worked
-             #   return render(request, 'add_reserva.html',{'error':'La hora no es válida','usuario':usuario, 'lab':lab})
             nueva_reserva=Reserva(idUsuario=matricula, fecha_reserva=fecha_res, inicio_reserva=inicio_res,fin_reserva=fin_res, idLab=laboratorio)
             nueva_reserva.save()
             send_mail(subject= 'Reserva realizada',

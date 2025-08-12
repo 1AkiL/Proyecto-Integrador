@@ -138,7 +138,9 @@
         <button class="btn" data-lab="lab5">Lab5</button>
         <button class="btn" data-lab="lab6">Lab6</button>
         <button class="btn" data-lab="lab7">Lab7</button>
+        {% if UsuarioAdmin %}
         <a href="/recurso/add" class="btn"><i class = "bi bi-plus-circle"></i>Añadir Recurso</a>
+        {% endif %}
       </div>
 
       <div class="table-container">
@@ -151,7 +153,9 @@
               <th>Disco duro</th>
               <th>Sistema operativo</th>
               <th>Estado del recurso</th>
+              {% if UsuarioAdmin %}
               <th>Borrar recurso</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -163,11 +167,13 @@
               <td>{{recurso.almacenamiento}} GB</td>
               <td>{{recurso.sistema_operativo}}</td>
               <td>{{recurso.estado_recurso}}</td>
+              {% if UsuarioAdmin %}
               <td>
               <a href="/recursos/{{recurso.idRecurso}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar recurso">
                 <i class="bi bi-trash"></i>
               </a>
             </td>
+            {% endif %}
             </tr>
             {%endfor%}
           </tbody>
@@ -182,7 +188,9 @@
               <th>Disco duro</th>
               <th>Sistema operativo</th>
               <th>Estado del recurso</th>
+              {% if UsuarioAdmin %}
               <th>Borrar recurso</th>
+              {%endif%}
             </tr>
           </thead>
           <tbody>
@@ -194,11 +202,13 @@
               <td>{{recurso.almacenamiento}} GB</td>
               <td>{{recurso.sistema_operativo}}</td>
               <td>{{recurso.estado_recurso}}</td>
+              {% if UsuarioAdmin %}
               <td>
               <a href="/recursos/{{recurso.idRecurso}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar recurso">
                 <i class="bi bi-trash"></i>
               </a>
             </td>
+            {% endif %}
             </tr>
             {%endfor%}
           </tbody>
@@ -213,7 +223,9 @@
               <th>Disco duro</th>
               <th>Sistema operativo</th>
               <th>Estado del recurso</th>
+              {% if UsuarioAdmin %}
               <th>Borrar recurso</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -225,11 +237,13 @@
               <td>{{recurso.almacenamiento}} GB</td>
               <td>{{recurso.sistema_operativo}}</td>
               <td>{{recurso.estado_recurso}}</td>
+              {% if UsuarioAdmin %}
               <td>
               <a href="/recursos/{{recurso.idRecurso}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar recurso">
                 <i class="bi bi-trash"></i>
               </a>
             </td>
+            {% endif %}
             </tr>
             {%endfor%}
           </tbody>
@@ -245,7 +259,9 @@
               <th>Disco duro</th>
               <th>Sistema operativo</th>
               <th>Estado del recurso</th>
+              {% if UsuarioAdmin %}
               <th>Borrar recurso</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -257,11 +273,13 @@
               <td>{{recurso.almacenamiento}} GB</td>
               <td>{{recurso.sistema_operativo}}</td>
               <td>{{recurso.estado_recurso}}</td>
+              {% if UsuarioAdmin %}
               <td>
               <a href="/recursos/{{recurso.idRecurso}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar recurso">
                 <i class="bi bi-trash"></i>
               </a>
             </td>
+            {% endif %}
             </tr>
             {%endfor%}
           </tbody>
@@ -276,7 +294,9 @@
               <th>Disco duro</th>
               <th>Sistema operativo</th>
               <th>Estado del recurso</th>
+              {% if UsuarioAdmin %}
               <th>Borrar recurso</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -288,11 +308,13 @@
               <td>{{recurso.almacenamiento}} GB</td>
               <td>{{recurso.sistema_operativo}}</td>
               <td>{{recurso.estado_recurso}}</td>
+              {% if UsuarioAdmin %}
               <td>
               <a href="/recursos/{{recurso.idRecurso}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar recurso">
                 <i class="bi bi-trash"></i>
               </a>
             </td>
+            {% endif %}
             </tr>
             {%endfor%}
           </tbody>
@@ -307,7 +329,9 @@
               <th>Disco duro</th>
               <th>Sistema operativo</th>
               <th>Estado del recurso</th>
+              {% if UsuarioAdmin %}
               <th>Borrar recurso</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -319,11 +343,13 @@
               <td>{{recurso.almacenamiento}} GB</td>
               <td>{{recurso.sistema_operativo}}</td>
               <td>{{recurso.estado_recurso}}</td>
+              {% if UsuarioAdmin %}
               <td>
               <a href="/recursos/{{recurso.idRecurso}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar recurso">
                 <i class="bi bi-trash"></i>
               </a>
             </td>
+            {% endif %}
             </tr>
             {%endfor%}
           </tbody>
@@ -338,7 +364,9 @@
               <th>Disco duro</th>
               <th>Sistema operativo</th>
               <th>Estado del recurso</th>
+              {% if UsuarioAdmin %}
               <th>Borrar recurso</th>
+              {% endif %}
             </tr>
           </thead>
           <tbody>
@@ -350,11 +378,13 @@
               <td>{{recurso.almacenamiento}} GB</td>
               <td>{{recurso.sistema_operativo}}</td>
               <td>{{recurso.estado_recurso}}</td>
+              {% if UsuarioAdmin %}
               <td>
               <a href="/recursos/{{recurso.idRecurso}}/delete" class="btn btn-danger btn-sm" type="button" title="Borrar recurso">
                 <i class="bi bi-trash"></i>
               </a>
             </td>
+            {% endif %}
             </tr>
             {%endfor%}
           </tbody>
