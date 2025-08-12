@@ -16,12 +16,6 @@ class Usuario(models.Model):
     def __str__(self):
         return self.user.username + ' - ' + self.RolId.nombre_rol
     
-class TipoRecurso(models.Model):
-    idTipoRecurso=models.IntegerField(primary_key=True, unique=True)
-    nombre_tipoRecurso=models.CharField(max_length=30)
-    
-    def __str__(self):
-        return self.nombre_tipoRecurso
     
 class EstadoRecurso(models.Model):
     idEstadoRecurso=models.IntegerField(primary_key=True,unique=True)
@@ -40,7 +34,6 @@ class Laboratorio(models.Model):
 class Recurso(models.Model):
     idRecurso=models.AutoField(primary_key=True,unique=True)
     nombre_recurso=models.CharField(max_length=40)
-    tipo_recurso=models.ForeignKey(TipoRecurso, on_delete=models.CASCADE, null=True)
     estado_recurso=models.ForeignKey(EstadoRecurso, on_delete=models.CASCADE, default=1)
     idLab=models.ForeignKey(Laboratorio, on_delete=models.CASCADE, null=True)
     memoria=models.IntegerField(null=True)
