@@ -21,7 +21,7 @@ from sistemaGestion import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.signin, name='signin'),
-    path('calendario/',views.calendario,name='calendario'),
+    path('reservas/',views.calendario,name='reservas'),
     path('recursos/',views.recursos, name='recursos'),
     path('reservar/',views.reservar, name='reservar'),
     path('logoff/',views.signoff,name='logout'),

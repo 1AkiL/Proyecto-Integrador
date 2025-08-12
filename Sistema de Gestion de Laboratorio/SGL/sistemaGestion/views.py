@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import Recurso, Laboratorio, Usuario, Reserva, Mantenimiento
+from .models import Recurso, Laboratorio, Usuario, Reserva, Mantenimiento, EstadoRecurso
 from django.utils.timezone import localtime, localdate
 from .forms import ReservaForm
 from django.shortcuts import get_object_or_404
@@ -123,4 +123,8 @@ def mantenimientos(request):
     return render(request, 'mantenimiento.html',{'mantenimientos':mantenimiento})
 
 def addRecurso(request):
-    return HttpResponse('Recurso added')
+    lab=Laboratorio.objects.all()
+    est_rec=EstadoRecurso.objects.all() #Estado recurso por si no se entiende
+    recurso=Recurso.objects.all()
+    print(request.POST)
+    return render(request, 'add_recurso.html', {'lab':lab , 'est_rec':est_rec, 'recurso':recurso})
