@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <title>Sidebar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
   <style>
     .sidebar-custom {
@@ -43,9 +44,16 @@
       transition: 0.3s !important;
       display: flex !important;
       align-items: center !important;
-      gap: 8px !important;
+      gap: 6px !important; 
       text-decoration: none !important;
       justify-content: center;
+      white-space: nowrap; 
+    }
+
+    .sidebar-buttons a.btn i {
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
     }
 
     .sidebar-buttons a.btn:hover {
@@ -55,13 +63,26 @@
 </head>
 <body>
   <div class="sidebar-custom">
-    <div class="sidebar-title">RESERVA</div>
+    
+    <div class="sidebar-title" id="sidebar-title"></div>
     <div class="sidebar-buttons">
-      <a href="/recursos" class="btn"><i class="bi bi-pc-display"></i>Recursos</a>
-      <a href="/calendario" class="btn"><i class="bi bi-search"></i>Consulta</a>
-      <A href="/reservar" class ="btn"><i class="bi bi-search"></i>Reservar</a>
-      <a href="/reservas/admin" class="btn"><i class="bi bi-list-check"></i>Administrar Reservas</a>
-      <a href="/mis-reservas" class="btn"><i class="bi bi-calendar2-week"></i>Mis Reservas</a>
+      {%if UsuarioAdmin or UsuarioDocente%}
+        <a href="/reservar" class="btn"><i class="bi bi-calendar-plus"></i>Reservar</a>
+      {%endif%}
+        <a href="/recursos" class="btn"><i class="bi bi-pc-display"></i>Recursos</a>
+        <a href="/calendario" class="btn"><i class="bi bi-search"></i>Consulta</a>
+      {%if UsuarioAdmin%}
+        <a href="/reservas/admin" class="btn"><i class="bi bi-list-check"></i>Administrar Reservas</a>
+      {%endif%}
+      {%if UsuarioAdmin or UsuarioDocente%}
+        <a href="/mis-reservas" class="btn"><i class="bi bi-calendar2-week"></i>Mis Reservas</a>
+      {%endif%}
+      {% if UsuarioAdmin%}
+      <a href="/mantenimientos" class="btn"><i class="bi bi-gear-fill"></i>Mantenimiento</a>
+      {%endif%}
+      {%if UsuarioAdmin%}
+      <a href="/usuarios/admin" class="btn"><i class="bi bi-people-fill"></i>Usuarios</a>
+      {%endif%}
       <a href="/logoff" class="btn"><i class="bi bi-box-arrow-right"></i>Cerrar sesión</a>
     </div>
   </div>

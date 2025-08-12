@@ -11,87 +11,11 @@
 
   <style>
     body { background-color: #fff4ff; }
-
-    .header-img {
-      width: 100%;
-      max-height: 180px;
-      object-fit: cover;
-    }
-
-    #calendar {
-      font-size: 0.9rem;
-      background: #fff; 
-      border-radius: 10px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.12);
-      max-width: 720px;
-      margin: 0 auto;
-      overflow-x: auto;
-      padding: 10px;
-    }
-
-    .fc-col-header-cell {
-      background-color: #501f65;
-      color: #fff !important;
-      border: 1px solid #ddd;
-      padding: 8px 0;
-      font-weight: 700;
-      text-align: center;
-      text-transform: capitalize;
-    }
-
-    .fc-col-header-cell-cushion {
-      color: #fff !important;
-      text-decoration: none !important;
-    }
-
-    .fc-daygrid-day {
-      border: 1px solid #ddd !important;
-      padding: 10px 8px !important;
-      vertical-align: top;
-      background-color: #fff;
-      cursor: pointer;
-      transition: background-color 0.15s ease-in-out;
-      color: #501f65;
-    }
-
-    .fc-daygrid-day:hover {
-      background-color: #f0e6ff;
-    }
-
-    .fc-daygrid-day a {
-      color: #501f65 !important;
-      text-decoration: none !important;
-      display: block;
-    }
-
-    .fc-daygrid-day a:hover {
-      text-decoration: none !important;
-    }
-
-    .fc-daygrid-day-number {
-      color: #501f65 !important;
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-      display: inline-block;
-    }
-
-    .legend span {
-      display: inline-block;
-      width: 14px;
-      height: 14px;
-      border-radius: 3px;
-      margin-right: 6px;
-    }
-
-    .mantenimiento {
-      background-color: orange; 
-    }
-
-    .nodisponible {
-      background-color: red; 
-    }
-
+    .header-img { width: 100%; max-height: 180px; object-fit: cover; }
+    #calendar { background-color: white; padding: 15px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.1); }
+    .legend span { display: inline-block; width: 15px; height: 15px; margin-right: 5px; border-radius: 3px; }
+    .mantenimiento { background-color: orange; }
+    .nodisponible { background-color: red; }
     #sidebar-container {
       min-height: 100vh;
       background-color: #f8f9fa;
@@ -110,6 +34,7 @@
 
       <div class="col">
         <div class="row g-4 p-4">
+          <!-- Calendario -->
           <div class="col-12">
             <div class="legend mb-3">
               <span class="mantenimiento"></span> En mantenimiento &nbsp;
@@ -139,7 +64,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
-
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       fetch('/sidebar')
@@ -158,30 +82,26 @@
 
     function inicializarCalendario() {
       const calendarEl = document.getElementById('calendar');
-
-      if (calendarEl._fcCalendar) {
-        try { calendarEl._fcCalendar.destroy(); } catch (e) {}
-        calendarEl._fcCalendar = null;
-      }
-
-      calendarEl.innerHTML = '';
+      calendarEl.innerHTML = ''; 
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
         locale: 'es',
-        firstDay: 0,
-        fixedWeekCount: false,
-        dayHeaderFormat: { weekday: 'short' },
-        titleFormat: { year: 'numeric', month: 'long' },
+        titleFormat: { 
+          year: 'numeric',
+          month: 'long'
+        },
         headerToolbar: {
           left: 'prev,next',
           center: 'title',
           right: ''
         },
-        contentHeight: 600,
-        events: [], 
+        events: [], // Vacío, sin ejemplos
         dateClick: function(info) {
-          const eventosDia = calendar.getEvents().filter(e => e.startStr === info.dateStr);
+          const eventosDia = calendar.getEvents().filter(e => 
+            e.startStr === info.dateStr
+          );
+
           const lista = document.getElementById('listaReservasDia');
           lista.innerHTML = '';
 
@@ -189,29 +109,31 @@
             eventosDia.forEach(ev => {
               const li = document.createElement('li');
               li.className = 'list-group-item';
-              {%for reserva in reservas%}
-              li.textContent = {{reserva.idUsuario}};
+              li.textContent = ev.title;
               lista.appendChild(li);
-              {%endfor%}
             });
           } else {
             const li = document.createElement('li');
             li.className = 'list-group-item text-muted';
-            li.textContent = 'No hay reservas para este día.'; //TODO Aqui va el texto donde se pone las reservas.
+            li.textContent = 'No hay reservas para este día.';
             lista.appendChild(li);
           }
 
-          const modal = new bootstrap.Modal(document.getElementById('modalReservasDia'));
-          modal.show();
+          new bootstrap.Modal(document.getElementById('modalReservasDia')).show();
         }
       });
 
       calendar.render();
-      calendarEl._fcCalendar = calendar;
     }
   </script>
 </body>
 </html>
+
+
+
+
+
+
 
 
 

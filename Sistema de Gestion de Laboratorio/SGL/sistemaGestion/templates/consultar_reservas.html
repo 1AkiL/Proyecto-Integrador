@@ -89,35 +89,31 @@
     <div id="sidebar-container"></div>
 
     <div class="table-container">
-      <h4 class="mb-4 text-center">Todas las reservas</h4>
+      <h4 class="mb-4 text-center">Consultar Reservas</h4>
       <div class="table-responsive">
         <table class="table table-bordered align-middle">
           <thead class="table-dark">
             <tr>
-              <th>Usuario</th>
               <th>Matrícula</th>
+              <th>Usuario</th>
               <th>Email</th>
               <th>Fecha</th>
               <th>Hora inicio</th>
               <th>Hora fin</th>
               <th>Laboratorio</th>
-              <th>Borrar</th>
+
             </tr>
           </thead>
           <tbody>
             {%for reserva in reservas%}
             <tr>
-              <td>{{reserva.idUsuario}}</td>
               <td>{{reserva.idUsuario.id}}</td>
+              <td>{{reserva.idUsuario}}</td>
               <td>{{reserva.idUsuario.email}}</td>
               <td>{{reserva.fecha_reserva}}</td>
               <td>{{reserva.inicio_reserva}}</td>
               <td>{{reserva.fin_reserva}}</td>
               <td>{{reserva.idLab}}</td>
-              <td>
-                <a href="#" class="btn btn-borrar btn-sm">
-                  <i class="bi bi-trash"></i> Borrar
-                </a>
               </td>
             </tr>
             {%endfor%}

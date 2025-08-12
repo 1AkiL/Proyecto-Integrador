@@ -35,49 +35,10 @@
       min-height: calc(100vh - 180px);
     }
 
-    .sidebar-custom {
-      background-color: #e3e3e3;
-      border-right: 1px solid #ccc;
-      width: 230px;
-      padding: 0;
-      font-size: 0.9rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sidebar-title {
-      background-color: #f0f0f0;
-      padding: 10px 12px;
-      font-weight: bold;
-      text-transform: uppercase;
-      border-bottom: 1px solid #dcdcdc;
-      text-align: center;
-    }
-
-    .sidebar-buttons {
-      padding: 15px;
+    
+    .flex-grow-1 {
+      padding: 20px;
       flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-    }
-
-    .sidebar-buttons .btn {
-      width: 100%;
-      margin-bottom: 10px;
-      background-color: #682c8b;
-      color: white;
-      border: none;
-      padding: 10px 0;
-      font-weight: 600;
-      border-radius: 5px;
-      text-align: center;
-      transition: background-color 0.3s ease;
-      font-size: 0.95rem;
-    }
-
-    .sidebar-buttons .btn:hover {
-      background-color: #501f65;
     }
 
     .buttons-container {
@@ -86,6 +47,8 @@
       flex-wrap: wrap;
       gap: 25px;
       padding: 20px;
+      margin-bottom: 16px;
+      border-radius: 6px;
     }
 
     .buttons-container .btn {
@@ -106,7 +69,7 @@
     }
 
     .programas {
-      padding: 0 20px;
+      padding: 0 0 10px 0;
     }
 
     .programas ul {
@@ -117,7 +80,7 @@
     }
 
     .table-container {
-      padding: 0 20px 20px 20px;
+      padding: 0 0 20px 0;
     }
 
     table {
@@ -146,7 +109,6 @@
       display: table;
     }
 
-    /* Estilo para limitar ancho de la columna Sistema Operativo */
     th:nth-child(5),
     td:nth-child(5) {
       max-width: 150px;
@@ -163,18 +125,10 @@
   </header>
 
   <div class="main-content">
-    <div class="sidebar-custom">
-      <div class="sidebar-title">RECURSOS</div>
-      <div class="sidebar-buttons">
-        <a href="reservar.php" class="btn"><i class="bi bi-calendar-check me-2"></i>Reserva</a>
-        <a href="consultarcalendario.php" class="btn"><i class="bi bi-search me-2"></i>Consulta</a>
-        <a href="todas_las_reservas.php" class="btn d-block"><i class="bi bi-list-check me-2"></i></i>Administrar Reservas</a>
-        <a href="misreservas.php" class="btn"><i class="bi bi-calendar2-week me-2"></i></i>Mis Reservas</a>
-        <a href="../index.php" class="btn"><i class="bi bi-box-arrow-right me-2"></i>Cerrar sesión</a>
-        
-      </div>
-    </div>
+    
+    <div id="sidebar-container"></div>
 
+    <!-- Contenido principal -->
     <div class="flex-grow-1">
       <div class="buttons-container">
         <button class="btn active" data-lab="lab1">Lab1</button>
@@ -184,44 +138,7 @@
         <button class="btn" data-lab="lab5">Lab5</button>
         <button class="btn" data-lab="lab6">Lab6</button>
         <button class="btn" data-lab="lab7">Lab7</button>
-      </div>
-
-      <div class="programas">
-        <ul id="prog-lab1" class="programas-list">
-          <li>Microsoft Office (10 licencias)</li>
-          <li>Visual Studio Code</li>
-          <li>AutoCAD</li>
-        </ul>
-        <ul id="prog-lab2" class="programas-list" style="display:none;">
-          <li>MATLAB</li>
-          <li>SolidWorks</li>
-          <li>Chrome</li>
-        </ul>
-        <ul id="prog-lab3" class="programas-list" style="display:none;">
-          <li>Photoshop (5 licencias)</li>
-          <li>Illustrator</li>
-          <li>GIMP</li>
-        </ul>
-        <ul id="prog-lab4" class="programas-list" style="display:none;">
-          <li>NetBeans</li>
-          <li>Eclipse</li>
-          <li>Java SDK</li>
-        </ul>
-        <ul id="prog-lab5" class="programas-list" style="display:none;">
-          <li>MySQL Workbench</li>
-          <li>HeidiSQL</li>
-          <li>XAMPP</li>
-        </ul>
-        <ul id="prog-lab6" class="programas-list" style="display:none;">
-          <li>Unity</li>
-          <li>Unreal Engine</li>
-          <li>Blender</li>
-        </ul>
-        <ul id="prog-lab7" class="programas-list" style="display:none;">
-          <li>Python (Anaconda)</li>
-          <li>JupyterLab</li>
-          <li>RStudio</li>
-        </ul>
+        <a href="/recurso/add" class="btn"><i class = "bi bi-plus-circle"></i>Añadir Recurso</a>
       </div>
 
       <div class="table-container">
@@ -236,13 +153,15 @@
             </tr>
           </thead>
           <tbody>
+            {%for recurso in recursos%}
             <tr>
-              <td>HP ProDesk 400</td>
-              <td>8 GB</td>
-              <td>Intel i5</td>
-              <td>500 GB</td>
-              <td>Windows 10</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
 
@@ -257,13 +176,15 @@
             </tr>
           </thead>
           <tbody>
+            {%for recurso in recursos2%}
             <tr>
-              <td>Dell OptiPlex 3080</td>
-              <td>16 GB</td>
-              <td>Intel i7</td>
-              <td>1 TB</td>
-              <td>Windows 11</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
 
@@ -278,18 +199,21 @@
             </tr>
           </thead>
           <tbody>
+            {%for recurso in recursos3%}
             <tr>
-              <td>Acer Aspire TC</td>
-              <td>12 GB</td>
-              <td>Intel i5</td>
-              <td>1 TB</td>
-              <td>Windows 10</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
 
         <table id="lab4">
           <thead>
+            
             <tr>
               <th>Modelo PC</th>
               <th>RAM</th>
@@ -299,13 +223,15 @@
             </tr>
           </thead>
           <tbody>
+            {%for recurso in recursos4%}
             <tr>
-              <td>Lenovo ThinkCentre</td>
-              <td>8 GB</td>
-              <td>Intel i3</td>
-              <td>500 GB</td>
-              <td>Ubuntu 22.04</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
 
@@ -320,13 +246,15 @@
             </tr>
           </thead>
           <tbody>
+            {%for recurso in recursos5%}
             <tr>
-              <td>HP EliteDesk</td>
-              <td>16 GB</td>
-              <td>AMD Ryzen 5</td>
-              <td>512 GB SSD</td>
-              <td>Windows 11</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
 
@@ -341,13 +269,15 @@
             </tr>
           </thead>
           <tbody>
+            {%for recurso in recursos6%}
             <tr>
-              <td>MSI Creator</td>
-              <td>32 GB</td>
-              <td>Intel i9</td>
-              <td>2 TB SSD</td>
-              <td>Windows 11 Pro</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
 
@@ -362,13 +292,15 @@
             </tr>
           </thead>
           <tbody>
+            {%for recurso in recursos7%}
             <tr>
-              <td>ASUS VivoMini</td>
-              <td>8 GB</td>
-              <td>Intel i5</td>
-              <td>256 GB SSD</td>
-              <td>Linux Mint</td>
+              <td>{{recurso.nombre_recurso}}</td>
+              <td>{{recurso.memoria}} GB</td>
+              <td>{{recurso.procesador}}</td>
+              <td>{{recurso.almacenamiento}} GB</td>
+              <td>{{recurso.sistema_operativo}}</td>
             </tr>
+            {%endfor%}
           </tbody>
         </table>
       </div>
@@ -376,31 +308,69 @@
   </div>
 
   <script>
-    const buttons = document.querySelectorAll('.buttons-container .btn');
-    const tables = document.querySelectorAll('.table-container > table');
-    const programas = document.querySelectorAll('.programas-list');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        const labId = button.getAttribute('data-lab');
+    
+    fetch('/sidebar')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('sidebar-container').innerHTML = data;
 
         
-        tables.forEach(table => {
-          table.classList.toggle('active', table.id === labId);
-        });
+        const titleElement = document.querySelector('#sidebar-container .sidebar-title');
+        if (titleElement) {
+          titleElement.textContent = 'Recursos';
+        }
+      })
+      .catch(err => console.error('Error al cargar el sidebar:', err));
+  </script>
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".buttons-container .btn");
+  const programasLists = document.querySelectorAll(".programas-list");
+  const tables = document.querySelectorAll(".table-container > table");
 
-        
-        buttons.forEach(btn => {
-          btn.classList.toggle('active', btn === button);
-        });
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      
+      buttons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
 
-        
-        programas.forEach(prog => {
-          prog.style.display = prog.id === `prog-${labId}` ? 'block' : 'none';
-        });
+      const labId = button.getAttribute("data-lab");
+
+      
+      programasLists.forEach((list) => {
+        list.style.display = list.id === "prog-" + labId ? "block" : "none";
+      });
+
+      
+      tables.forEach((table) => {
+        table.classList.toggle("active", table.id === labId);
       });
     });
-  </script>
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll(".buttons-container .btn");
+  const programasLists = document.querySelectorAll(".programas-list");
+  const tables = document.querySelectorAll(".table-container > table");
+
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      
+      buttons.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const labId = button.getAttribute("data-lab");
+
+      
+      programasLists.forEach((list) => {
+        list.style.display = list.id === "prog-" + labId ? "block" : "none";
+      });
+
+</script>
+
+
 </body>
 </html>
 

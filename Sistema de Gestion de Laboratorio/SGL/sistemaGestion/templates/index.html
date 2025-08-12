@@ -59,10 +59,9 @@
 </head>
 <body>
   <header>
-    <img src="images/encabezado.png" alt="Encabezado" class="header-img" />
+    <img src="/header" alt="Encabezado" class="header-img" />
   </header>
 
-  {%block content%}
   <div class="container">
     <div class="login-box">
       <div class="login-title">
@@ -88,11 +87,11 @@
             <button type="submit" class="btn btn-acceder">Acceder</button>
           </div>
         </form>
-        <a href="#" id="show-reset" class="forgot-password">¿Olvidó su contraseña?</a>
+        <a href="" id="show-reset" class="forgot-password">¿Olvidó su contraseña?</a>
       </div>
     </div>
   </div>
-  <!-- Modal de recuperación de contraseña -->
+  
 <div id="reset-modal" class="modal-overlay" style="display:none;">
   <div class="modal-content shadow">
     <h5 class="text-center fw-bold mb-3">Recuperar Contraseña</h5>
@@ -103,7 +102,6 @@
     </div>
     <button class="btn-close position-absolute top-0 end-0 m-3" id="close-reset"></button>
   </div>
-  {%endblock%}
 </div>
 
 <!-- Estilos -->

@@ -25,9 +25,15 @@ urlpatterns = [
     path('recursos/',views.recursos, name='recursos'),
     path('reservar/',views.reservar, name='reservar'),
     path('logoff/',views.signoff,name='logout'),
-    path('test/',views.test),
     path('mis-reservas/',views.mis_reservas,name='mis-reservas'),
-    path('reservas/admin/', views.mis_reservas,name='reservas-admin'),
+    path('reservas/admin/', views.admin_reservas,name='reservas-admin'),
     path('mail/', views.email_test),
+    path('sidebar/',views.sidebar, name='sidebar'),
+    path('reservas/<int:idReserva>/delete', views.borrar_mi_reserva, name='borrar-mi-reserva'),
+    path('reservas/admin/<int:idReserva>/delete', views.borrar_reserva_admin, name='borrar-reserva-admin'),
+    path('usuarios/admin', views.admin_usuarios, name='usuarios-admin'),
+    path('mantenimientos/', views.mantenimientos, name='mantenimientos'),
+    path('recurso/add/',views.addRecurso, name="add-recurso")
+    
     
 ]

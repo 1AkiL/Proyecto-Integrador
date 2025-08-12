@@ -34,6 +34,7 @@
       min-height: calc(100vh - 180px);
     }
 
+   
     .table-container {
       padding: 20px;
       flex-grow: 1;
@@ -85,17 +86,16 @@
         <tbody>
           {%for reserva in reservas%}
           <tr>
-            <td>{{reserva.fecha_reserva}}</td>
-            <td>{{reserva.inicio_reserva}} - {{reserva.fin_reserva}}</td>
-            <td>{{reserva.idLab}}</td>
-            <td>
-              <button class="btn btn-danger btn-sm" type="button" title="Borrar reserva">
-                <i class="bi bi-trash"></i>
-              </button>
+            <td> {{reserva.fecha_reserva}}</td>
+            <td> {{reserva.inicio_reserva}} - {{reserva.fin_reserva}}</td>
+            <td> {{reserva.idLab}} </td>
+            <td> 
+                <button href="/reservas/<int:idReserva>/delete" class="btn btn-danger btn-sm btn-borrar">
+                  <i class="bi bi-trash"></i> Borrar
+                </button>
             </td>
-            {%endfor%}
           </tr>
-          
+          {%endfor%}
         </tbody>
       </table>
     </div>
