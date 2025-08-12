@@ -125,6 +125,20 @@ def mantenimientos(request):
 def addRecurso(request):
     lab=Laboratorio.objects.all()
     est_rec=EstadoRecurso.objects.all() #Estado recurso por si no se entiende
-    recurso=Recurso.objects.all()
-    print(request.POST)
-    return render(request, 'add_recurso.html', {'lab':lab , 'est_rec':est_rec, 'recurso':recurso})
+    if request.method=="GET":
+        return render(request, 'add_recurso.html', {'lab':lab , 'est_rec':est_rec})
+    else:
+        try:
+            print(request.POST)
+            nombre= request.POST['nombre']
+            estado=request.POST['Estado']
+            procesador=request.POST['Procesador']
+            memoria=request.POST['memoria']
+            almacenamiento=request.POST['almacenamiento']
+            os=request.POST['os']
+            laboratorio=request.POST['Laboratorio']
+            nuevo_recurso=Recurso(nombre_recurso=nombre, estado_recurso=estado, idLab=laboratorio, memoria=memoria, procesador=procesador, almacenamiento=almacenamiento, sistema_operativo=os)
+            nuevo_recurso.save()
+            return redirect('recursos')
+        except ValueError:
+            return render(request,'add_recurso.html',{'lab':lab, 'est_rec':est_rec, 'error':'Algún dato es inválido'})
