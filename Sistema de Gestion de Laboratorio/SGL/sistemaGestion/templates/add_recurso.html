@@ -39,19 +39,19 @@
               <form id="user-form" method="post">
                 {% csrf_token %}
                 <input type="text" id="nombre" class="form-control mb-2" placeholder="Nombre de recurso" name="nombre" required>
-                <select id="estado" class="form-select mb-3" name="Estado" required>
+                <select id="estado" type="interger" class="form-select mb-3" name="Estado" required>
                     <option selected disabled value="">Seleccionar estado de recurso</option>
                     {% for rec in est_rec %}
-                    <option>{{rec}}</option>
+                    <option>{{rec.idEstadoRecurso}}</option>
                     {% endfor %}
                 <input type="procesador" id="procesador" class="form-control mb-2" placeholder="Procesador" name="Procesador" required>
-                <input type="memoria" id="memoria" class="form-control mb-2" placeholder="Memoria" name="memoria" required>
-                <input type="int" id="almacenamiento" class="form-control mb-2" placeholder="Almacenamiento" name="almacenamiento" required>
+                <input type="number" id="memoria" class="form-control mb-2" placeholder="Memoria" name="memoria" required>
+                <input type="number" id="almacenamiento" class="form-control mb-2" placeholder="Almacenamiento" name="almacenamiento" required>
                 <input type="os" id="os" class="form-control mb-2" placeholder="Sistema Operativo" name="os" required>
                 <select id="idLab" class="form-select mb-3" name="Laboratorio" required>
                   <option selected disabled value="">Seleccionar laboratorio</option>
                   {% for labo in lab %}
-                  <option> {{ labo }}</option>
+                  <option> {{ labo.idLab }}</option>
                   {% endfor %}
                 </select>
                 <div class="d-flex justify-content-center gap-3">

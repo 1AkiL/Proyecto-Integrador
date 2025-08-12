@@ -128,7 +128,7 @@ def addRecurso(request):
     if request.method=="GET":
         return render(request, 'add_recurso.html', {'lab':lab , 'est_rec':est_rec})
     else:
-        try:
+        #try:
             print(request.POST)
             nombre= request.POST['nombre']
             estado=request.POST['Estado']
@@ -137,8 +137,10 @@ def addRecurso(request):
             almacenamiento=request.POST['almacenamiento']
             os=request.POST['os']
             laboratorio=request.POST['Laboratorio']
-            nuevo_recurso=Recurso(nombre_recurso=nombre, estado_recurso=estado, idLab=laboratorio, memoria=memoria, procesador=procesador, almacenamiento=almacenamiento, sistema_operativo=os)
+            estad=EstadoRecurso.objects.get(idEstadoRecurso=estado)
+            labo=Laboratorio.objects.get(idLab=laboratorio)
+            nuevo_recurso=Recurso(nombre_recurso=nombre, estado_recurso=estad, idLab=labo, memoria=memoria, procesador=procesador, almacenamiento=almacenamiento, sistema_operativo=os)
             nuevo_recurso.save()
             return redirect('recursos')
-        except ValueError:
-            return render(request,'add_recurso.html',{'lab':lab, 'est_rec':est_rec, 'error':'Algún dato es inválido'})
+        #except ValueError:
+         #   return render(request,'add_recurso.html',{'lab':lab, 'est_rec':est_rec, 'error':'Algún dato es inválido'})
