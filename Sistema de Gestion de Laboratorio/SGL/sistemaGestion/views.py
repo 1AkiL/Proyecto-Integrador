@@ -3,11 +3,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import Recurso, Laboratorio, Usuario, Reserva, Mantenimiento, EstadoRecurso,Rol, EstadoMantenimiento
 from django.contrib.auth.models import User
-from django.utils.timezone import localtime, localdate, now
-from django.utils import timezone
-from django.utils.dateparse import parse_time
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponse
 from django.core.mail import send_mail 
 from SGL.settings import EMAIL_HOST_USER
 from django.contrib.auth.hashers import make_password
@@ -102,13 +97,6 @@ def signoff(request):
     return redirect('signin')
 
 #Template for the emails
-def email_test(request):
-    send_mail(subject= 'Test email',
-              message= 'This is just a test email',
-              from_email=EMAIL_HOST_USER,
-              recipient_list=[request.user.email]
-              )
-    return HttpResponse('Message sent')
 
 @login_required
 #Permite a los sistemas que utilizan la sidebar funcionar, no remover.
@@ -122,7 +110,7 @@ def sidebar(request):
 #Es para mis_reservas, no confundir con borrar_reserva_admin
 def borrar_mi_reserva(request, idReserva):
     reserva=Reserva.objects.get(idReserva=idReserva)
-    email_borrar_reserva()
+    email_borrar_reserva(request)
     reserva.delete()
     return redirect('mis-reservas')
 

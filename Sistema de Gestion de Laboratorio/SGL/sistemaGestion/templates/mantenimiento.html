@@ -107,9 +107,8 @@
 <body>
 
   <header>
-    <img src="../images/encabezado.png" alt="Encabezado" class="header-img" />
-  </header>
-
+    {% load static %}
+    <img src="{% static 'sistemaGestion/encabezado.png' %}" alt="Encabezado" class="header-img" />  </header>
   <div class="main-content">
     
     <div id="sidebar-container"></div>
