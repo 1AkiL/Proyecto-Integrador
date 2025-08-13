@@ -68,7 +68,7 @@ def reservar(request):
             nueva_reserva=Reserva(idUsuario=matricula, fecha_reserva=fecha_res, inicio_reserva=inicio_res,fin_reserva=fin_res, idLab=laboratorio)
             nueva_reserva.save()
             send_mail(subject= 'Reserva realizada',
-                      message= 'Este email ha sido enviado para informar que su reserva ha sido aceptada.',
+                      message= f'Este email ha sido enviado para informar que su reserva para el dia {fecha_res} ha sido aceptada.',
                       from_email=EMAIL_HOST_USER,
                       recipient_list=[request.user.email])
             return redirect('calendario') 
@@ -116,7 +116,7 @@ def borrar_mi_reserva(request, idReserva):
 @login_required
 def borrar_reserva_admin(request,idReserva):
     reserva=Reserva.objects.get(idReserva=idReserva)
-    email_borrar_reserva()
+    email_borrar_reserva(request)
     reserva.delete()
     return redirect('admin-reservas')
 
