@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,14 +20,24 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-sq2l=!^a8%@*l2k!!p-8u53l9wo_)9$#1##=9)r5ucb13)a!$5'
+SECRET_KEY = '4i9r8thgr78egh8fnkuaeydgq879jsw21yfd763g7dijkawd-q=r=3fiuhewf3fdw=aefewfnuewwf32=3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
+SESSION_COOKIE_SECURE=True
 
+SECURE_SSL_REDIRECT=True
+
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+
+SECURE_HSTS_PRELOAD=True
+
+SECURE_HSTS_SECONDS=True
+
+CSRF_COOKIE_SECURE=True
 # Application definition
 
 INSTALLED_APPS = [
@@ -122,7 +131,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS=[BASE_DIR / "static"]
+STATICFILES_DIRS=[BASE_DIR / "sistemaGestion\static"]
 
 
 # Default primary key field type
@@ -131,6 +140,7 @@ STATICFILES_DIRS=[BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+#Email
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'

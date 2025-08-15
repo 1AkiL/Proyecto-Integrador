@@ -39,7 +39,6 @@ def recursos(request):
     recursos5=Recurso.objects.filter(idLab=5)
     recursos6=Recurso.objects.filter(idLab=6)
     recursos7=Recurso.objects.filter(idLab=7)
-    lab=Laboratorio.objects.all()
     print(request.POST)
     return render(request,'recursos.html',{
         'recursos':recursos, 'recursos2': recursos2, 'recursos3':recursos3,'recursos4':recursos4,

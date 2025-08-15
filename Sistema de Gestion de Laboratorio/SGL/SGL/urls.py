@@ -17,8 +17,6 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from sistemaGestion import views
-from . import settings
-from sistemaGestion import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +37,7 @@ urlpatterns = [
     path('mantenimientos/add/',views.addMantenimiento, name='add-mantenimiento'),
     path('usuarios/admin/<str:user>/delete/',views.borrar_usuarios, name='borrar-usuarios'),
     path('mantenimientos/<int:idMantenimiento>/delete/',views.borrar_mantenimientos, name='borrar-mantenimientos'),
-    path('recursos/<int:idRecurso>/delete',views.borrar_recursos,name='borrar-recursos')
+    path('recursos/<int:idRecurso>/delete',views.borrar_recursos,name='borrar-recursos'),
+    
 ]
 
